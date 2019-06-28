@@ -6,7 +6,7 @@ const { check, validationResult } = require('express-validator');
 
 // @route       POST api/teams/
 // @desc        Create or update a team
-// @access      Private @TODO ADMIN ONLY
+// @access      Admin
 router.post(
   '/',
   [
@@ -52,5 +52,51 @@ router.post(
     }
   }
 );
+
+// @route       GET api/teams/
+// @desc        Get all teams
+// @access      Public
+router.get('/', async (req, res) => {
+  try {
+    const teams = await Team.find();
+    res.json(teams);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route       GET api/teams/:team_id
+// @desc        Get team by ID
+// @access      Public
+router.get('/:team_id', async (req, res) => {
+  try {
+    const team = await Team.findById(req.params.team_id);
+
+    if (!team) return res.status(400).json({ msg: 'Team not found' });
+
+    res.json(team);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == 'ObjectId')
+      return res.status(400).json({ msg: 'Team not found' });
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route       DELETE api/teams/:team_id
+// @desc        Delete team
+// @access      Admin
+router.delete('/:team_id', admin, async (req, res) => {
+  try {
+    // Remove team
+    await Team.findOneAndRemove({ _id: req.params.team_id });
+
+    res.json({ msg: 'Team deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

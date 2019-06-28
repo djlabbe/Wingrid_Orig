@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../../middleware/auth');
+const admin = require('../../middleware/admin');
 const Game = require('../../models/Game');
 const Team = require('../../models/Team');
 const { check, validationResult } = require('express-validator');
 
 // @route       POST api/games/
 // @desc        Create or update a game
-// @access      Private @TODO ADMIN ONLY
+// @access      Private
 router.post(
   '/',
   [
-    auth,
+    admin,
     check('away_name', 'Away team name is required')
       .not()
       .isEmpty(),
