@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../../middleware/auth');
+const admin = require('../../middleware/admin');
 const Team = require('../../models/Team');
 const { check, validationResult } = require('express-validator');
 
@@ -10,7 +10,7 @@ const { check, validationResult } = require('express-validator');
 router.post(
   '/',
   [
-    auth,
+    admin,
     check('fullName', 'Team name is required')
       .not()
       .isEmpty(),
