@@ -258,6 +258,11 @@ img {
   border: 1px solid #ccc;
 }
 
+::placeholder {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
 .form input[type='submit'],
 button {
   font: inherit;

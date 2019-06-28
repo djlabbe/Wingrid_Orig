@@ -7,7 +7,7 @@ const Landing = () => {
       <div className='dark-overlay'>
         <div className='landing-inner'>
           <h1 className='x-large'>WinGrid</h1>
-          <p className='lead'>Outwit, outplay, outpick... win big!</p>
+          <p className='lead'>Outwit, outplay, outpick... win the grid!</p>
           <div className='buttons'>
             <Link to='/register' className='btn btn-primary'>
               Sign Up
