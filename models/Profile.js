@@ -16,19 +16,19 @@ const ProfileSchema = new mongoose.Schema({
     default: Date.now
   },
   social: {
-    youtube: {
-      type: String
-    },
-    twitter: {
+    instagram: {
       type: String
     },
     facebook: {
       type: String
     },
+    twitter: {
+      type: String
+    },
     pinterest: {
       type: String
     },
-    instagram: {
+    youtube: {
       type: String
     }
   }
