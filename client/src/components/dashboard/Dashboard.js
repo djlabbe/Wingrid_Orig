@@ -13,9 +13,12 @@ const Dashboard = ({
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, []);
+  }, [getCurrentProfile]);
   return loading && profile === null ? (
-    <Spinner />
+    <Fragment>
+      <h1 className='large text-primary'>Dashboard</h1>
+      <Spinner />
+    </Fragment>
   ) : (
     <Fragment>
       <h1 className='large text-primary'>Dashboard</h1>
@@ -23,9 +26,7 @@ const Dashboard = ({
         <i className='fas fa-user' /> Welcome {user && user.name}
       </p>
       {profile !== null ? (
-        <Fragment>
-          <DashboardActions />
-        </Fragment>
+        <DashboardActions />
       ) : (
         <Fragment>
           <p>You have not yet setup a profile, please add some info</p>

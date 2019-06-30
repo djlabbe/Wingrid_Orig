@@ -29,13 +29,18 @@ const EditProfile = ({
       location: loading || !profile.location ? '' : profile.location,
       bio: loading || !profile.bio ? '' : profile.bio,
       instagram: loading || !profile.social ? '' : profile.social.instagram,
-      facebook: loading || !profile.social ? '' : profile.social,
-      facebook,
+      facebook: loading || !profile.social ? '' : profile.social.facebook,
       twitter: loading || !profile.social ? '' : profile.social.twitter,
       pinterest: loading || !profile.social ? '' : profile.social.pinterest,
       youtube: loading || !profile.social ? '' : profile.social.youtube
     });
-  }, [loading]);
+  }, [
+    loading,
+    getCurrentProfile,
+    profile.bio,
+    profile.location,
+    profile.social
+  ]);
 
   const {
     location,

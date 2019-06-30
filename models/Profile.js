@@ -11,10 +11,6 @@ const ProfileSchema = new mongoose.Schema({
   bio: {
     type: String
   },
-  date: {
-    type: Date,
-    default: Date.now
-  },
   social: {
     instagram: {
       type: String
@@ -33,5 +29,7 @@ const ProfileSchema = new mongoose.Schema({
     }
   }
 });
+
+ProfileSchema.set('timestamps', true);
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

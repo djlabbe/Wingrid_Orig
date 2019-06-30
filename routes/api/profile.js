@@ -3,7 +3,6 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const { check, validationResult } = require('express-validator');
 
 // @route       GET api/profile/me
 // @desc        Get current user's profile
@@ -28,7 +27,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 // @route       POST api/profile/
-// @desc        Create or update user profile
+// @desc        Update user profile
 // @access      Private
 router.post('/', auth, async (req, res) => {
   const {
@@ -114,7 +113,6 @@ router.get('/user/:user_id', async (req, res) => {
 // @route       DELETE api/profile/
 // @desc        Delete profile, user & user's entries
 // @access      Private
-// @todo - remove user entries
 router.delete('/', auth, async (req, res) => {
   try {
     // Remove profile
