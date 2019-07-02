@@ -14,3 +14,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const GET_PROFILE = 'GET_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
+
+export const GET_SHEET = 'GET_SHEET';
+export const GET_ALL_SHEETS = 'GET_ALL_SHEETS';
+export const SHEET_ERROR = 'SHEET_ERROR';

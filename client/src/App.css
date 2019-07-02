@@ -245,6 +245,12 @@ img {
   color: #888;
 }
 
+.form .form-error {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--danger-color);
+}
+
 .form input[type='text'],
 .form input[type='email'],
 .form input[type='password'],
@@ -287,6 +293,9 @@ button {
   color: #3f729b;
 }
 .form .social-input i.fa-youtube {
+  color: #c4302b;
+}
+.form .social-input i.fa-pinterest {
   color: #c4302b;
 }
 .form .social-input i.fa-linkedin {

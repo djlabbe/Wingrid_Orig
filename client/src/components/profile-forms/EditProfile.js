@@ -34,13 +34,7 @@ const EditProfile = ({
       pinterest: loading || !profile.social ? '' : profile.social.pinterest,
       youtube: loading || !profile.social ? '' : profile.social.youtube
     });
-  }, [
-    loading,
-    getCurrentProfile,
-    profile.bio,
-    profile.location,
-    profile.social
-  ]);
+  }, []);
 
   const {
     location,
