@@ -12,7 +12,7 @@ const renderSheetList = (onSelect, sheetList) => {
           className='btn btn-game'
           onClick={() => onSelect(sheet.year, sheet.week)}
         >
-          {sheet.year} - Week #{sheet.week}
+          {sheet.year} | Week {sheet.week}
         </button>
       </div>
     );

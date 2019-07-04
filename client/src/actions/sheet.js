@@ -97,6 +97,9 @@ export const createSheet = (
       }
     };
 
+    /* Convert tiebreaker to 0 indexed value */
+    formData.tiebreakerIdx = formData.tiebreakerIdx - 1;
+
     const res = await axios.post('/api/sheets', formData, config);
 
     dispatch({
