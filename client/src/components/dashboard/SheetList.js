@@ -8,12 +8,12 @@ const renderSheetList = (onSelect, sheetList) => {
   return sheetList.map(sheet => {
     return (
       <div key={sheet._id}>
-        <a
-          className='game-link'
+        <button
+          className='btn btn-game'
           onClick={() => onSelect(sheet.year, sheet.week)}
         >
           {sheet.year} - Week #{sheet.week}
-        </a>
+        </button>
       </div>
     );
   });

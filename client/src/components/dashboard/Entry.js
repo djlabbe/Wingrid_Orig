@@ -14,9 +14,10 @@ const renderGameList = gameList => {
 const Entry = ({ sheet, onCancel, onSubmit }) => {
   return (
     <Fragment>
-      <h1 className='large text-primary'>
-        My Picks | {sheet.year} | Week {sheet.week}
-      </h1>
+      <h1 className='large text-primary'>My Picks</h1>
+      <h3 className='text-primary'>
+        {sheet.year} | Week {sheet.week}
+      </h3>
       <div className='my-2'>
         {renderGameList(sheet.games)}
         <div className='my-2'>

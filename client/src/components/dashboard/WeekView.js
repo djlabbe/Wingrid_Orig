@@ -2,7 +2,7 @@
 // Shows the user an entry form if they have not yet made picks,
 // shows the grid once picks have been submitted.
 
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import Entry from './Entry';
 import Grid from './Grid';
@@ -19,7 +19,7 @@ const WeekView = ({
 }) => {
   useEffect(() => {
     getSheet(year, week);
-  }, [getSheet]);
+  }, [getSheet, week, year]);
   const [showGrid, setShowGrid] = useState(false);
 
   if (loading || sheet === null) {
@@ -27,13 +27,7 @@ const WeekView = ({
   }
 
   if (showGrid) {
-    return (
-      <Grid
-        onCancel={() => setShowGrid(true)}
-        sheet={sheet}
-        onCancel={onCancel}
-      />
-    );
+    return <Grid sheet={sheet} onCancel={onCancel} />;
   }
 
   return (

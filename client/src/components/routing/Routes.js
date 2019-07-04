@@ -5,12 +5,12 @@ import Login from '../auth/Login';
 import Alert from '../layout/Alert';
 import Profile from '../profile/Profile';
 import Dashboard from '../dashboard/Dashboard';
-import CreateProfile from '../profile-forms/CreateProfile';
-import EditProfile from '../profile-forms/EditProfile';
+import CreateProfile from '../profile/CreateProfile';
+import EditProfile from '../profile/EditProfile';
 import SheetNew from '../sheet-forms/SheetNew';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
-import WeekView from '../week-view/WeekView';
+import WeekView from '../dashboard/WeekView';
 
 const Routes = () => {
   return (

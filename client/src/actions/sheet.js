@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR, SUBMIT_ENTRY } from './types';
+import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR } from './types';
 
 // Submit an entry for a sheet
 export const submitEntry = (sheetId, formData) => async dispatch => {

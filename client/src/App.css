@@ -156,6 +156,17 @@ img {
   color: #333;
 }
 
+.btn-game {
+  background: none;
+  color: var(--primary-color);
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  font-size: 1.3rem;
+  /*border is optional*/
+  cursor: pointer;
+}
+
 .btn-primary,
 .bg-primary,
 .badge-primary,
@@ -597,8 +608,4 @@ button {
   border: 1px solid var(--dark-color);
   margin-top: 5px;
   margin-bottom: 20px;
-}
-
-.game-link {
-  cursor: pointer;
 }
