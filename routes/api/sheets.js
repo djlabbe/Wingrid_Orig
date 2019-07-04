@@ -80,12 +80,12 @@ router.get('/:sheet_id', async (req, res) => {
 // @desc        Get sheet by year and week
 // @access      Private
 router.get('/:year/:week', async (req, res) => {
+  console.log(req.params);
   try {
     const sheet = await Sheet.findOne({
       year: req.params.year,
       week: req.params.week
     });
-    console.log('HIT');
     res.json(sheet);
   } catch (err) {
     console.error(err.message);

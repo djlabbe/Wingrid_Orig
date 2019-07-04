@@ -1,38 +1,41 @@
-import React, { useEffect } from 'react';
-import Spinner from '../layout/Spinner';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getSheet } from '../../actions/sheet';
 
-const Entry = ({ getSheet, sheetData: { sheet, loading } }) => {
-  useEffect(() => {
-    getSheet();
-  }, []);
+const renderGameList = gameList => {
+  return gameList.map(game => {
+    return (
+      <div key={game._id}>
+        {game.homeTeam} @ {game.awayTeam}
+      </div>
+    );
+  });
+};
 
-  return loading && sheet === [] ? (
-    <div className='my-2'>
-      <h2 className='lead text-primary'>Pick Sheets</h2>
-      <Spinner />
-    </div>
-  ) : (
-    <div className='my-2'>
-      <h2 className='lead text-primary'>Your Picks</h2>
-      THIS IS A SHEET
-    </div>
+const Entry = ({ sheet, onCancel, onSubmit }) => {
+  return (
+    <Fragment>
+      <h1 className='large text-primary'>
+        My Picks | {sheet.year} | Week {sheet.week}
+      </h1>
+      <div className='my-2'>
+        {renderGameList(sheet.games)}
+        <div className='my-2'>
+          <button className='btn btn-danger' type='cancel' onClick={onCancel}>
+            Back
+          </button>
+          <button className='btn btn-primary' onClick={onSubmit}>
+            Submit
+          </button>
+        </div>
+      </div>
+    </Fragment>
   );
 };
 
 Entry.propTypes = {
-  getSheet: PropTypes.func.isRequired,
-  sheetData: PropTypes.object.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  sheet: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  console.log(state);
-  return { sheetData: state.sheets };
-};
-
-export default connect(
-  mapStateToProps,
-  { getSheet }
-)(Entry);
+export default Entry;

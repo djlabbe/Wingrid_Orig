@@ -1,40 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Spinner from '../layout/Spinner';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAllSheets } from '../../actions/sheet';
 
-const renderSheetList = sheetList => {
+const renderSheetList = (onSelect, sheetList) => {
   return sheetList.map(sheet => {
     return (
       <div key={sheet._id}>
-        {sheet.year} - Week #{sheet.week}
+        <a
+          className='game-link'
+          onClick={() => onSelect(sheet.year, sheet.week)}
+        >
+          {sheet.year} - Week #{sheet.week}
+        </a>
       </div>
     );
   });
 };
 
-const SheetList = ({ getAllSheets, sheetData: { sheets, loading } }) => {
+const SheetList = ({
+  onSelect,
+  getAllSheets,
+  sheetData: { sheets, loading }
+}) => {
   useEffect(() => {
     getAllSheets();
   }, [getAllSheets]);
-
-  return loading && sheets === [] ? (
-    <div className='my-2'>
-      <h2 className='lead text-primary'>Pick Sheets</h2>
-      <Spinner />
-    </div>
+  return loading || sheets === [] ? (
+    <Fragment>
+      <h1 className='large text-primary'>Contests</h1>
+      <div className='my-2'>
+        <Spinner />
+      </div>
+    </Fragment>
   ) : (
-    <div className='my-2'>
-      <h2 className='lead text-primary'>Your Picks</h2>
-      {renderSheetList(sheets)}
-    </div>
+    <Fragment>
+      <h1 className='large text-primary'>Contests</h1>
+      <div className='my-2'>{renderSheetList(onSelect, sheets)}</div>
+    </Fragment>
   );
 };
 
 SheetList.propTypes = {
   getAllSheets: PropTypes.func.isRequired,
-  sheetData: PropTypes.object.isRequired
+  sheetData: PropTypes.object.isRequired,
+  onSelect: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

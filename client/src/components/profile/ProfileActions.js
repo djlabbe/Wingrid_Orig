@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const DashboardActions = () => {
+const ProfileActions = () => {
   return (
     <div className='dash-buttons'>
       <Link to='/edit-profile' className='btn btn-light'>
@@ -11,4 +11,4 @@ const DashboardActions = () => {
   );
 };
 
-export default DashboardActions;
+export default ProfileActions;

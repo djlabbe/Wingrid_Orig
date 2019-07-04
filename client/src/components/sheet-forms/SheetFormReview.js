@@ -38,7 +38,7 @@ const SheetFormReview = ({ onCancel, formValues, createSheet, history }) => {
         <div>{formValues.tiebreakerIdx}</div>
       </div>
 
-      <button className='btn' type='cancel' onClick={onCancel}>
+      <button className='btn btn-danger' type='cancel' onClick={onCancel}>
         Back
       </button>
       <button className='btn' onClick={() => createSheet(formValues, history)}>

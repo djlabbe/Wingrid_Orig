@@ -598,3 +598,7 @@ button {
   margin-top: 5px;
   margin-bottom: 20px;
 }
+
+.game-link {
+  cursor: pointer;
+}

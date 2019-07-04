@@ -1,62 +1,30 @@
-import React, { Fragment, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
-import DashboardActions from './DashboardActions';
 import SheetList from './SheetList';
-import { getCurrentProfile } from '../../actions/profile';
+import WeekView from '../week-view/WeekView';
 
-const Dashboard = ({
-  getCurrentProfile,
-  auth: { user },
-  profile: { profile, loading }
-}) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
-  return loading && profile === null ? (
-    <Fragment>
-      <h1 className='large text-primary'>Dashboard</h1>
-      <Spinner />
-    </Fragment>
-  ) : (
-    <Fragment>
-      <h1 className='large text-primary'>Dashboard</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Welcome {user && user.name}
-      </p>
+class Dashboard extends Component {
+  state = { year: null, week: null };
 
-      {profile !== null ? (
-        <DashboardActions />
-      ) : (
-        <Fragment>
-          <p>You have not yet setup a profile, please add some info</p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>
-            Create Profile
-          </Link>
-        </Fragment>
-      )}
+  render() {
+    if (this.state.week == null || this.state.year == null) {
+      return (
+        <SheetList
+          onSelect={(year, week) => {
+            this.setState({ year, week });
+          }}
+        />
+      );
+    }
 
-      <Fragment>
-        <SheetList />
-      </Fragment>
-    </Fragment>
-  );
-};
+    return (
+      <WeekView
+        year={this.state.year}
+        week={this.state.week}
+        onCancel={() => this.setState({ year: null, week: null })}
+      />
+    );
+  }
+}
 
-Dashboard.propTypes = {
-  getCurrentProfile: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth,
-  profile: state.profile
-});
-
-export default connect(
-  mapStateToProps,
-  { getCurrentProfile }
-)(Dashboard);
+export default connect()(Dashboard);

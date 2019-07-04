@@ -1,7 +1,38 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR } from './types';
+import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR, SUBMIT_ENTRY } from './types';
+
+// Submit an entry for a sheet
+export const submitEntry = (sheetId, formData) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.put('/api/sheets/sheetId', formData, config);
+
+    dispatch({
+      type: GET_SHEET,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Submission Saved', 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: SHEET_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
 // Get a sheet by id
 export const getSheetById = sheetId => async dispatch => {
@@ -24,12 +55,12 @@ export const getSheetById = sheetId => async dispatch => {
 export const getSheet = (year, week) => async dispatch => {
   try {
     const res = await axios.get(`/api/sheets/${year}/${week}`);
-
     dispatch({
       type: GET_SHEET,
       payload: res.data
     });
   } catch (err) {
+    console.log(err);
     dispatch({
       type: SHEET_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
@@ -65,8 +96,6 @@ export const createSheet = (
         'Content-Type': 'application/json'
       }
     };
-
-    console.log(formData);
 
     const res = await axios.post('/api/sheets', formData, config);
 
