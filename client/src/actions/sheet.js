@@ -1,15 +1,48 @@
 import axios from 'axios';
 import { setAlert } from './alert';
 
-import { GET_SHEET, SHEET_ERROR } from './types';
+import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR } from './types';
 
-// Get a sheet
-export const getSheet = sheetId => async dispatch => {
+// Get a sheet by id
+export const getSheetById = sheetId => async dispatch => {
   try {
     const res = await axios.get('/api/sheets/' + sheetId);
 
     dispatch({
       type: GET_SHEET,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: SHEET_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get a sheet by year and week
+export const getSheet = (year, week) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/sheets/${year}/${week}`);
+
+    dispatch({
+      type: GET_SHEET,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: SHEET_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get all sheets
+export const getAllSheets = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/sheets/');
+    dispatch({
+      type: GET_ALL_SHEETS,
       payload: res.data
     });
   } catch (err) {

@@ -55,7 +55,7 @@ router.post(
 // @access      Public
 router.get('/', async (req, res) => {
   try {
-    const sheets = await Sheet.find();
+    const sheets = await Sheet.find().select('-entries -games -tiebreakerIdx');
     res.json(sheets);
   } catch (err) {
     console.error(err.message);
@@ -69,6 +69,23 @@ router.get('/', async (req, res) => {
 router.get('/:sheet_id', async (req, res) => {
   try {
     const sheet = await Sheet.findById(req.params.sheet_id);
+    res.json(sheet);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route       GET api/sheets/:year/:week
+// @desc        Get sheet by year and week
+// @access      Private
+router.get('/:year/:week', async (req, res) => {
+  try {
+    const sheet = await Sheet.findOne({
+      year: req.params.year,
+      week: req.params.week
+    });
+    console.log('HIT');
     res.json(sheet);
   } catch (err) {
     console.error(err.message);

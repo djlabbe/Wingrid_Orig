@@ -1,4 +1,4 @@
-import { GET_SHEET, SHEET_ERROR } from '../actions/types';
+import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR } from '../actions/types';
 
 const initialState = {
   sheet: null,
@@ -9,12 +9,17 @@ const initialState = {
 
 export default function(state = initialState, action) {
   const { type, payload } = action;
-
   switch (type) {
     case GET_SHEET:
       return {
         ...state,
-        profile: payload,
+        sheet: payload,
+        loading: false
+      };
+    case GET_ALL_SHEETS:
+      return {
+        ...state,
+        sheets: payload,
         loading: false
       };
     case SHEET_ERROR:

@@ -15,7 +15,9 @@ class SheetNew extends Component {
       );
     }
     return (
-      <SheetForm handleSubmit={() => this.setState({ showFormReview: true })} />
+      <SheetForm
+        onSurveySubmit={() => this.setState({ showFormReview: true })}
+      />
     );
   }
 
@@ -25,5 +27,5 @@ class SheetNew extends Component {
 }
 
 export default reduxForm({
-  form: 'surveyForm'
+  form: 'sheetForm'
 })(SheetNew);

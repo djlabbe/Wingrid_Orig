@@ -1,6 +1,6 @@
 /* Global Styles */
 :root {
-  --primary-color: #177441;
+  --primary-color: #2ea1ff;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Inconsolata', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   background-color: #fff;
@@ -67,7 +67,7 @@ img {
 }
 
 .text-primary {
-  color: var(--primary-color);
+  color: var(--dark-color);
 }
 
 .text-dark {
@@ -588,4 +588,13 @@ button {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+}
+
+/* Sheet Form */
+
+.game-row {
+  padding: 20px 20px 0px 20px;
+  border: 1px solid var(--dark-color);
+  margin-top: 5px;
+  margin-bottom: 20px;
 }
