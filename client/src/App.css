@@ -612,3 +612,7 @@ button {
 .game-cell {
   padding: 10px 20px;
 }
+
+.game-label {
+  padding: 10px 20px;
+}

@@ -20,6 +20,65 @@ const renderField = ({
   </div>
 );
 
+const renderGames = ({ fields, meta: { error, submitFailed } }) => (
+  <ul>
+    <small className='form-error'>
+      {submitFailed && error && <span>{error}</span>}
+    </small>
+    {fields.map((game, index) => (
+      <li key={index} className='game-row'>
+        <h4>Game #{index + 1}</h4>
+        <Field
+          name={`${game}.awayTeam`}
+          type='text'
+          component={renderField}
+          label='Away Team'
+          placeholder='Away'
+        />
+        <Field
+          name={`${game}.homeTeam`}
+          type='text'
+          component={renderField}
+          label='Home Team'
+          placeholder='Home'
+        />
+        <Field
+          name={`${game}.date`}
+          type='text'
+          component={renderField}
+          label='Date'
+          placeholder='09-09-2019'
+        />
+        <div className='my-1'>
+          <button
+            type='button'
+            className='btn btn-danger'
+            title='Remove Game'
+            onClick={() => fields.remove(index)}
+          >
+            Delete
+          </button>
+        </div>
+      </li>
+    ))}
+    <div className='my-1' ref={ref}>
+      <button
+        type='button'
+        className='btn btn-dark'
+        onClick={() => {
+          fields.push({});
+          ref.current.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }}
+      >
+        Add Game
+      </button>
+    </div>
+  </ul>
+);
+
 const ref = createRef();
 
 const SheetForm = ({
@@ -29,64 +88,6 @@ const SheetForm = ({
   reset,
   submitting
 }) => {
-  const renderGames = ({ fields, meta: { error, submitFailed } }) => (
-    <ul>
-      <small className='form-error'>
-        {submitFailed && error && <span>{error}</span>}
-      </small>
-      {fields.map((game, index) => (
-        <li key={index} className='game-row'>
-          <h4>Game #{index + 1}</h4>
-          <Field
-            name={`${game}.awayTeam`}
-            type='text'
-            component={renderField}
-            label='Away Team'
-            placeholder='Away'
-          />
-          <Field
-            name={`${game}.homeTeam`}
-            type='text'
-            component={renderField}
-            label='Home Team'
-            placeholder='Home'
-          />
-          <Field
-            name={`${game}.date`}
-            type='text'
-            component={renderField}
-            label='Date'
-            placeholder='09-09-2019'
-          />
-          <div className='my-1'>
-            <button
-              type='button'
-              className='btn btn-danger'
-              title='Remove Game'
-              onClick={() => fields.remove(index)}
-            >
-              Delete
-            </button>
-          </div>
-        </li>
-      ))}
-      <div className='my-1' ref={ref}>
-        <button
-          type='button'
-          className='btn btn-dark'
-          onClick={() => {
-            fields.push({});
-            ref.current.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }}
-        >
-          Add Game
-        </button>
-      </div>
-    </ul>
-  );
   return (
     <Fragment>
       <h1 className='large text-primary'>Create Sheet</h1>
@@ -131,7 +132,7 @@ const SheetForm = ({
             disabled={pristine || submitting}
             onClick={reset}
           >
-            Clear Values
+            Clear
           </button>
         </div>
       </form>

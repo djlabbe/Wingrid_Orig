@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
-import validateEntry from './validateEntry';
+import RadioGroup from './RadioGroup';
+import validate from './validate';
 
 const renderField = ({
   input,
@@ -10,7 +11,7 @@ const renderField = ({
   placeholder,
   meta: { touched, error }
 }) => (
-  <div>
+  <Fragment>
     <small className='form-text'>{label}</small>
     <div>
       <input {...input} type={type} placeholder={placeholder} />
@@ -18,52 +19,23 @@ const renderField = ({
         {touched && error && <span>{error}</span>}
       </small>
     </div>
-  </div>
+  </Fragment>
 );
 
 const renderGames = ({ games, meta: { error, submitFailed } }) => (
   <Fragment>
-    <small className='form-error'>
-      {submitFailed && error && <span>{error}</span>}
-    </small>
-    <table>
-      <thead>
-        <tr>
-          <th>Away Team</th>
-          <th> vs. </th>
-          <th>Home Team</th>
-        </tr>
-      </thead>
-      <tbody>
-        {games.map(game => (
-          <tr key={game._id}>
-            <td className='game-cell'>
-              <label>
-                <Field
-                  name={game._id}
-                  component='input'
-                  type='radio'
-                  value={game.awayTeam}
-                />{' '}
-                {game.awayTeam}
-              </label>
-            </td>
-            <td className='game-cell'>@</td>
-            <td className='game-cell'>
-              <label>
-                <Field
-                  name={game._id}
-                  component='input'
-                  type='radio'
-                  value={game.homeTeam}
-                />{' '}
-                {game.homeTeam}
-              </label>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    {games.map((game, idx) => (
+      <Fragment key={game._id}>
+        <Field
+          component={RadioGroup}
+          name={`game.${idx}`}
+          options={[
+            { title: game.awayTeam, value: game.awayTeam },
+            { title: game.homeTeam, value: game.homeTeam }
+          ]}
+        />
+      </Fragment>
+    ))}
   </Fragment>
 );
 
@@ -84,25 +56,33 @@ const Entry = ({
       </p>
       <form className='form' onSubmit={handleSubmit(onSubmit)}>
         <div className='my-2'>
-          <FieldArray
-            games={sheet.games}
-            name='games'
-            component={renderGames}
-          />
+          <table>
+            <tbody>
+              <FieldArray
+                games={sheet.games}
+                name='games'
+                component={renderGames}
+              />
+              <tr>
+                <td colSpan='2'>
+                  <Field
+                    name='tiebreaker'
+                    type='text'
+                    component={renderField}
+                    label={
+                      'Tiebreaker: ' +
+                      sheet.games[sheet.tiebreakerIdx].awayTeam +
+                      ' @ ' +
+                      sheet.games[sheet.tiebreakerIdx].homeTeam
+                    }
+                    placeholder='Predict combined total points at end of game.'
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <Field
-          name='tiebreaker'
-          type='text'
-          component={renderField}
-          label={
-            'Tiebreaker: ' +
-            sheet.games[sheet.tiebreakerIdx].awayTeam +
-            ' @ ' +
-            sheet.games[sheet.tiebreakerIdx].homeTeam
-          }
-          placeholder='Predict combined total points at end of game.'
-        />
         <div className='my-2'>
           <button
             type='submit'
@@ -143,6 +123,6 @@ Entry.propTypes = {
 };
 
 export default reduxForm({
-  validateEntry,
+  validate,
   form: 'entryForm'
 })(Entry);
