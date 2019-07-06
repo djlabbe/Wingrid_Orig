@@ -9,14 +9,16 @@ class RadioGroup extends Component {
       <tr>
         {options.map(o => (
           <td key={o.value} className='game-cell'>
-            <label>
-              <input
-                type='radio'
-                {...input}
-                value={o.value}
-                checked={o.value === input.value}
-                required={true}
-              />{' '}
+            <input
+              type='radio'
+              {...input}
+              value={o.value}
+              id={o.title}
+              checked={o.value === input.value}
+              required={true}
+              className='entry-radio'
+            />{' '}
+            <label className='entry-label' htmlFor={o.title}>
               {o.title}
             </label>
           </td>

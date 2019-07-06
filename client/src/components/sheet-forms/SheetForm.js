@@ -1,6 +1,8 @@
 import React, { createRef, Fragment } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import validate from './validate';
+import Select from 'react-select';
+import { teams } from './teams';
 
 const renderField = ({
   input,
@@ -20,6 +22,20 @@ const renderField = ({
   </div>
 );
 
+const renderTeamSelect = ({ input, label, meta: { touched, error } }) => (
+  <div>
+    <small className='form-text'>{label}</small>
+    <Select
+      {...input}
+      options={teams}
+      onChange={value => input.onChange(value)}
+      onBlur={() => input.onBlur(input.value)}
+    />
+    <small className='form-error'>
+      {touched && error && <span>{error}</span>}
+    </small>
+  </div>
+);
 const renderGames = ({ fields, meta: { error, submitFailed } }) => (
   <ul>
     <small className='form-error'>
@@ -31,16 +47,14 @@ const renderGames = ({ fields, meta: { error, submitFailed } }) => (
         <Field
           name={`${game}.awayTeam`}
           type='text'
-          component={renderField}
+          component={renderTeamSelect}
           label='Away Team'
-          placeholder='Away'
         />
         <Field
           name={`${game}.homeTeam`}
           type='text'
-          component={renderField}
+          component={renderTeamSelect}
           label='Home Team'
-          placeholder='Home'
         />
         <Field
           name={`${game}.date`}
@@ -143,5 +157,10 @@ const SheetForm = ({
 export default reduxForm({
   validate,
   form: 'sheetForm',
+  initialValues: {
+    year: new Date().getFullYear(),
+    games: new Array(15).fill({ homeTeam: '', awayTeam: '', date: '' }),
+    tiebreakerIdx: 15
+  },
   destroyOnUnmount: false
 })(SheetForm);

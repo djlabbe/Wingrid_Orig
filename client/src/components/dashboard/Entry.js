@@ -22,7 +22,7 @@ const renderField = ({
   </Fragment>
 );
 
-const renderGames = ({ games, meta: { error, submitFailed } }) => (
+const renderGames = ({ games }) => (
   <Fragment>
     {games.map((game, idx) => (
       <Fragment key={game._id}>
