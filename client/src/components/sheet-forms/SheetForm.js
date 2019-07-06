@@ -97,7 +97,7 @@ const ref = createRef();
 
 const SheetForm = ({
   handleSubmit, // ReduxForm
-  onSurveySubmit, // Custom impl from SheetNew
+  onFormSubmit, // Custom impl from SheetNew
   pristine,
   reset,
   submitting
@@ -106,7 +106,7 @@ const SheetForm = ({
     <Fragment>
       <h1 className='large text-primary'>Create Sheet</h1>
 
-      <form className='form' onSubmit={handleSubmit(onSurveySubmit)}>
+      <form className='form' onSubmit={handleSubmit(onFormSubmit)}>
         <Field
           name='week'
           type='text'
@@ -159,8 +159,8 @@ export default reduxForm({
   form: 'sheetForm',
   initialValues: {
     year: new Date().getFullYear(),
-    games: new Array(15).fill({ homeTeam: '', awayTeam: '', date: '' }),
-    tiebreakerIdx: 15
+    games: new Array(1).fill({ homeTeam: '', awayTeam: '', date: '' }),
+    tiebreakerIdx: 1
   },
   destroyOnUnmount: false
 })(SheetForm);

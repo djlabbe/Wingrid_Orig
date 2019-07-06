@@ -15,8 +15,18 @@ class SheetNew extends Component {
       );
     }
     return (
+      // Strip off the 'label' that is included
+      // in the form values from the Select team list
       <SheetForm
-        onSurveySubmit={() => this.setState({ showFormReview: true })}
+        onFormSubmit={values => {
+          values.games = values.games.map(game => {
+            return Object.assign({}, game, {
+              homeTeam: game.homeTeam.value,
+              awayTeam: game.awayTeam.value
+            });
+          });
+          this.setState({ showFormReview: true });
+        }}
       />
     );
   }

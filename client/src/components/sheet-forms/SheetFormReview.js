@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { createSheet } from '../../actions/sheet';
 
 const SheetFormReview = ({ onCancel, formValues, createSheet, history }) => {
+  console.log(formValues);
   const renderGames = formValues.games.map((game, idx) => {
     return (
       <div key={idx}>
