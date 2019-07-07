@@ -1,30 +1,65 @@
-import React, { Component } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
+import Spinner from '../layout/Spinner';
+import PropTypes from 'prop-types';
+import Challenge from './Challenge';
 import { connect } from 'react-redux';
-import SheetList from './SheetList';
-import WeekView from './WeekView';
+import { getAllSheets } from '../../actions/sheet';
 
-class Dashboard extends Component {
-  state = { year: null, week: null };
+const Dashboard = ({ getAllSheets, sheetData: { sheets, loading } }) => {
+  useEffect(() => {
+    getAllSheets();
+  }, [getAllSheets]);
 
-  render() {
-    if (this.state.week == null || this.state.year == null) {
+  const [selectedSheet, selectSheet] = useState(null);
+
+  const renderChallenges = challenges => {
+    return challenges.map(sheet => {
       return (
-        <SheetList
-          onSelect={(year, week) => {
-            this.setState({ year, week });
-          }}
-        />
+        <div key={sheet._id}>
+          <button
+            className='btn btn-game'
+            onClick={() => {
+              selectSheet(sheet);
+            }}
+          >
+            {sheet.year} | Week {sheet.week}
+          </button>
+        </div>
       );
-    }
+    });
+  };
 
+  if (loading || sheets === []) {
+    return <Spinner />;
+  }
+  if (!selectedSheet) {
     return (
-      <WeekView
-        year={this.state.year}
-        week={this.state.week}
-        onCancel={() => this.setState({ year: null, week: null })}
-      />
+      <Fragment>
+        <h2 className='large text-primary'>Dashboard</h2>
+        <div className='my-2'>{renderChallenges(sheets)}</div>
+      </Fragment>
     );
   }
-}
+  return (
+    <Challenge
+      sheet={selectedSheet}
+      onCancel={() => {
+        selectSheet(null);
+      }}
+    />
+  );
+};
 
-export default connect()(Dashboard);
+Dashboard.propTypes = {
+  getAllSheets: PropTypes.func.isRequired,
+  sheetData: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  sheetData: state.sheets
+});
+
+export default connect(
+  mapStateToProps,
+  { getAllSheets }
+)(Dashboard);

@@ -2,7 +2,10 @@ import React, { Fragment } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 import RadioGroup from './RadioGroup';
+import { submitEntry } from '../../actions/entry';
 import validate from './validate';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const renderField = ({
   input,
@@ -28,7 +31,7 @@ const renderGames = ({ games }) => (
       <Fragment key={game._id}>
         <Field
           component={RadioGroup}
-          name={`game.${idx}`}
+          name={`winners.${idx}`}
           options={[
             { title: game.awayTeam, value: game.awayTeam },
             { title: game.homeTeam, value: game.homeTeam }
@@ -39,10 +42,11 @@ const renderGames = ({ games }) => (
   </Fragment>
 );
 
-const Entry = ({
+let Entry = ({
+  history,
   sheet,
+  submitEntry,
   handleSubmit, // ReduxForm
-  onSubmit, // Custom impl from SheetNew
   onCancel,
   pristine,
   reset,
@@ -54,7 +58,13 @@ const Entry = ({
       <p className='lead'>
         {sheet.year} | Week {sheet.week}
       </p>
-      <form className='form' onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className='form'
+        onSubmit={handleSubmit(values => {
+          submitEntry(values, sheet._id, history);
+          onCancel();
+        })}
+      >
         <div className='my-2'>
           <table>
             <tbody>
@@ -116,13 +126,18 @@ const Entry = ({
 };
 
 Entry.propTypes = {
-  onCancel: PropTypes.func.isRequired,
-  sheet: PropTypes.object.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  submitEntry: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  sheet: PropTypes.object.isRequired
 };
+
+Entry = connect(
+  null,
+  { submitEntry }
+)(Entry);
 
 export default reduxForm({
   validate,
   form: 'entryForm'
-})(Entry);
+})(withRouter(Entry));

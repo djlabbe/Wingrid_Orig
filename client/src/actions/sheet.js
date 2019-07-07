@@ -3,37 +3,6 @@ import { setAlert } from './alert';
 
 import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR } from './types';
 
-// Submit an entry for a sheet
-export const submitEntry = (sheetId, formData) => async dispatch => {
-  try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-
-    const res = await axios.put('/api/sheets/sheetId', formData, config);
-
-    dispatch({
-      type: GET_SHEET,
-      payload: res.data
-    });
-
-    dispatch(setAlert('Submission Saved', 'success'));
-  } catch (err) {
-    const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-    }
-
-    dispatch({
-      type: SHEET_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
 // Get a sheet by id
 export const getSheetById = sheetId => async dispatch => {
   try {
@@ -55,12 +24,12 @@ export const getSheetById = sheetId => async dispatch => {
 export const getSheet = (year, week) => async dispatch => {
   try {
     const res = await axios.get(`/api/sheets/${year}/${week}`);
+    console.log(res.data);
     dispatch({
       type: GET_SHEET,
       payload: res.data
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: SHEET_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }

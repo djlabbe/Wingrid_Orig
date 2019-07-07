@@ -5,6 +5,10 @@ const EntrySchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
+  sheet: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'sheet'
+  },
   winners: {
     type: [String]
   },

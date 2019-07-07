@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const admin = require('../../middleware/admin');
+const auth = require('../../middleware/auth');
 const Game = require('../../models/Game');
 const Team = require('../../models/Team');
 const Sheet = require('../../models/Sheet');
+const Entry = require('../../models/Entry');
 const { check, validationResult } = require('express-validator');
 
 // @route       POST api/sheets/
@@ -12,7 +14,7 @@ const { check, validationResult } = require('express-validator');
 router.post(
   '/',
   [
-    //auth,
+    auth,
     check('year', 'Year is required')
       .not()
       .isEmpty(),
@@ -55,7 +57,8 @@ router.post(
 // @access      Public
 router.get('/', async (req, res) => {
   try {
-    const sheets = await Sheet.find().select('-entries -games -tiebreakerIdx');
+    // const sheets = await Sheet.find().select('-entries -games -tiebreakerIdx');
+    const sheets = await Sheet.find();
     res.json(sheets);
   } catch (err) {
     console.error(err.message);
@@ -65,11 +68,13 @@ router.get('/', async (req, res) => {
 
 // @route       GET api/sheets/:sheet_id
 // @desc        Get sheet by id
-// @access      Public
+// @access      Private
 router.get('/:sheet_id', async (req, res) => {
   try {
     const sheet = await Sheet.findById(req.params.sheet_id);
     res.json(sheet);
+    const entry = await Entry.findOne({ sheet: req.params.sheet_id });
+    sheet.entry = entry;
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
@@ -84,8 +89,16 @@ router.get('/:year/:week', async (req, res) => {
     const sheet = await Sheet.findOne({
       year: req.params.year,
       week: req.params.week
-    });
-    res.json(sheet);
+    }).populate('entries');
+
+    const entry = await Entry.findOne({ sheet: sheet._id });
+
+    const resp = {
+      sheet,
+      entry
+    };
+
+    res.json(resp);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

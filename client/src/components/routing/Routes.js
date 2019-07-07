@@ -10,7 +10,7 @@ import EditProfile from '../profile/EditProfile';
 import SheetNew from '../sheet-forms/SheetNew';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
-import WeekView from '../dashboard/WeekView';
+import Challenge from '../dashboard/Challenge';
 
 const Routes = () => {
   return (
@@ -24,11 +24,7 @@ const Routes = () => {
         <PrivateRoute exact path='/create-profile' component={CreateProfile} />
         <PrivateRoute exact path='/edit-profile' component={EditProfile} />
         <PrivateRoute exact path='/create-sheet' component={SheetNew} />
-        <PrivateRoute
-          exact
-          path='/dashboard/:year/:week'
-          component={WeekView}
-        />
+        <PrivateRoute exact path='/challenge' component={Challenge} />
         <Route component={NotFound} />
       </Switch>
     </section>

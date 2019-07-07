@@ -1,9 +1,7 @@
-import { GET_SHEET, GET_ALL_SHEETS, SHEET_ERROR } from '../actions/types';
+import { GET_ENTRY, ENTRY_ERROR } from '../actions/types';
 
 const initialState = {
-  sheet: null,
   entry: null,
-  sheets: [],
   loading: true,
   error: {}
 };
@@ -11,20 +9,13 @@ const initialState = {
 export default function(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case GET_SHEET:
+    case GET_ENTRY:
       return {
         ...state,
-        sheet: payload.sheet,
-        entry: payload.entry,
+        entry: payload ? payload : null,
         loading: false
       };
-    case GET_ALL_SHEETS:
-      return {
-        ...state,
-        sheets: payload,
-        loading: false
-      };
-    case SHEET_ERROR:
+    case ENTRY_ERROR:
       return {
         ...state,
         error: payload,

@@ -37,15 +37,6 @@ const SheetSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-  entries: {
-    type: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'entry'
-      }
-    ],
-    default: []
-  },
   winner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
