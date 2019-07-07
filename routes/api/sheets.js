@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const admin = require('../../middleware/admin');
 const auth = require('../../middleware/auth');
-const Game = require('../../models/Game');
-const Team = require('../../models/Team');
 const Sheet = require('../../models/Sheet');
 const Entry = require('../../models/Entry');
 const { check, validationResult } = require('express-validator');
@@ -57,8 +55,7 @@ router.post(
 // @access      Public
 router.get('/', async (req, res) => {
   try {
-    // const sheets = await Sheet.find().select('-entries -games -tiebreakerIdx');
-    const sheets = await Sheet.find();
+    const sheets = await Sheet.find().sort([['year', -1], ['week', -1]]);
     res.json(sheets);
   } catch (err) {
     console.error(err.message);

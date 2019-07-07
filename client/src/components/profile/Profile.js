@@ -23,7 +23,7 @@ const Profile = ({
     <Fragment>
       <h1 className='large text-primary'>Profile</h1>
       <p className='lead'>
-        <i className='fas fa-user' /> Welcome {user && user.name}
+        <i className='fas fa-user' /> Welcome {user && user.first}
       </p>
 
       {profile !== null ? (

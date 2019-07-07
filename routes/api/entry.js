@@ -62,4 +62,20 @@ router.get('/:sheet_id/', auth, async (req, res) => {
   }
 });
 
+// @route       GET api/entry/all/:sheet_id
+// @desc        Get all entries for a single sheet
+// @access      Public
+router.get('/all/:sheet_id', async (req, res) => {
+  try {
+    const entries = await Entry.find({ sheet: req.params.sheet_id }).populate(
+      'user',
+      ['first', 'last']
+    );
+    res.json(entries);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

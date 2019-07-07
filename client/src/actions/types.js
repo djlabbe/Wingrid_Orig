@@ -21,3 +21,6 @@ export const SHEET_ERROR = 'SHEET_ERROR';
 
 export const GET_ENTRY = 'GET_ENTRY';
 export const ENTRY_ERROR = 'SHEET_ERROR';
+
+export const GET_GRID = 'GET_GRID';
+export const GRID_ERROR = 'GRID_ERROR';

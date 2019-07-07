@@ -4,6 +4,7 @@ import auth from './auth';
 import profile from './profile';
 import sheets from './sheets';
 import entry from './entry';
+import grid from './grid';
 import { reducer as reduxForm } from 'redux-form';
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   profile,
   sheets,
   entry,
+  grid,
   form: reduxForm
 });
