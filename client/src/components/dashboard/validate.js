@@ -2,7 +2,7 @@ const validate = values => {
   const errors = {};
 
   var reg = new RegExp('^[0-9]+$');
-  if (!reg.test(values.tiebreakerIdx) || 0 > values.tiebreaker) {
+  if (!reg.test(values.tiebreaker) || 0 > values.tiebreaker) {
     errors.tiebreaker = 'Please enter a whole number.';
   }
   if (!values.tiebreaker) {

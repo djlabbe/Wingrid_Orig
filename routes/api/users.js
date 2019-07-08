@@ -5,7 +5,7 @@ const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const keys = require('../../config/keys');
 
 // @route       POST api/users
 // @desc        Register user
@@ -68,7 +68,7 @@ router.post(
 
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        keys.jwtSecret,
         {
           expiresIn: 360000
         },
