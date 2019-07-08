@@ -35,8 +35,13 @@ const Dashboard = ({ getAllSheets, sheetData: { sheets, loading } }) => {
   if (!selectedSheet) {
     return (
       <Fragment>
-        <h2 className='large text-primary'>Dashboard</h2>
-        <div className='my-2'>{renderChallenges(sheets)}</div>
+        <h2 className='large text-primary'>Challenges</h2>
+        <h3 className='text-primary my-1'>Current</h3>
+        <div className='my-1'>{renderChallenges(sheets.slice(0, 2))}</div>
+        <h3 className='text-primary my-1'>Archived</h3>
+        <div className='my-1'>
+          {renderChallenges(sheets.slice(2, sheets.length))}
+        </div>
       </Fragment>
     );
   }

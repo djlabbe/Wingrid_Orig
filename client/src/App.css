@@ -162,6 +162,7 @@ img {
   border: none;
   padding: 0 !important;
   font: inherit;
+  font-size: 1.2rem;
   /*border is optional*/
   cursor: pointer;
 }
