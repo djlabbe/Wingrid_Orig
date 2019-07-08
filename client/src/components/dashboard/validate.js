@@ -1,13 +1,12 @@
 const validate = values => {
   const errors = {};
 
-  const numValue = parseInt(values.tiebreaker);
-
-  if (isNaN(numValue) || 0 > numValue) {
-    errors.tiebreaker = 'Please enter a positive integer.';
+  var reg = new RegExp('^[0-9]+$');
+  if (!reg.test(values.tiebreakerIdx) || 0 > values.tiebreaker) {
+    errors.tiebreaker = 'Please enter a whole number.';
   }
   if (!values.tiebreaker) {
-    errors.tiebreaker = 'Please enter a tiebreaker.';
+    errors.tiebreaker = 'Please provide a tiebreaker.';
   }
 
   return errors;

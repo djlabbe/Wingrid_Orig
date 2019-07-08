@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { setAlert } from './alert';
 import { GET_GRID, GRID_ERROR } from './types';
 
 // Get all sheets for a single challenge

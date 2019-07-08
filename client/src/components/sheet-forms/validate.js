@@ -11,6 +11,20 @@ const validate = values => {
     errors.tiebreakerIdx = 'Required';
   }
 
+  var reg = new RegExp('^[0-9]+$');
+  if (!reg.test(values.tiebreakerIdx) || values.tiebreakerIdx <= 0) {
+    errors.tiebreakerIdx = 'Hmmm... please rethink this...';
+  }
+
+  if (values.games && values.tiebreakerIdx > values.games.length) {
+    if (values.games.length !== 0) {
+      errors.tiebreakerIdx =
+        'Please enter a valid game number between 1 and ' + values.games.length;
+    } else {
+      errors.tiebreakerIdx = "You're going to need to add a game...";
+    }
+  }
+
   if (!values.games || !values.games.length) {
     errors.games = { _error: 'At least one game must be entered' };
   } else {

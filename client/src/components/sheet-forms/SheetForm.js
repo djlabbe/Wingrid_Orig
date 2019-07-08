@@ -159,8 +159,8 @@ export default reduxForm({
   form: 'sheetForm',
   initialValues: {
     year: new Date().getFullYear(),
-    games: new Array(1).fill({ homeTeam: '', awayTeam: '', date: '' }),
-    tiebreakerIdx: 1
+    games: new Array(15).fill({ homeTeam: '', awayTeam: '', date: '' }),
+    tiebreakerIdx: 15
   },
   destroyOnUnmount: false
 })(SheetForm);

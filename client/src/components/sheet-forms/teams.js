@@ -140,8 +140,8 @@ export const teams = [
     label: 'Alabama'
   },
   {
-    value: 'Alabama Birmingham (UAB)',
-    label: 'Alabama Birmingham (UAB)'
+    value: 'Alabama Birmingham-(UAB)',
+    label: 'Alabama Birmingham-(UAB)'
   },
   {
     value: 'Appalachian State',
@@ -196,20 +196,20 @@ export const teams = [
     label: 'Buffalo'
   },
   {
-    value: 'Brigham Young (BYU)',
-    label: 'Brigham Young (BYU)'
+    value: 'Brigham Young',
+    label: 'Brigham Young'
   },
   {
     value: 'California',
     label: 'California'
   },
   {
-    value: 'Californa, Los Angeles (UCLA)',
-    label: 'Californa, Los Angeles (UCLA)'
+    value: 'Californa, Los Angeles',
+    label: 'Californa, Los Angeles'
   },
   {
-    value: 'Central Florida (UCF)',
-    label: 'Central Florida (UCF)'
+    value: 'Central Florida',
+    label: 'Central Florida'
   },
   {
     value: 'Central Michigan',
@@ -240,8 +240,8 @@ export const teams = [
     label: 'Colorado State'
   },
   {
-    value: 'Connecticut (Uconn)',
-    label: 'Connecticut (Uconn)'
+    value: 'Connecticut',
+    label: 'Connecticut'
   },
   {
     value: 'Duke',
@@ -256,8 +256,8 @@ export const teams = [
     label: 'East Carolina'
   },
   {
-    value: 'Florida International (FIU)',
-    label: 'Florida International (FIU)'
+    value: 'Florida International',
+    label: 'Florida International'
   },
   {
     value: 'Florida',
@@ -336,8 +336,8 @@ export const teams = [
     label: 'Liberty'
   },
   {
-    value: 'Louisian State (LSU)',
-    label: 'Louisian State (LSU)'
+    value: 'Louisiana State',
+    label: 'Louisiana State'
   },
   {
     value: 'Louisiana Tech',
@@ -364,8 +364,8 @@ export const teams = [
     label: 'Maryland'
   },
   {
-    value: 'Massachusetts (UMass)',
-    label: 'Massachusetts (UMass)'
+    value: 'Massachusetts',
+    label: 'Massachusetts'
   },
   {
     value: 'Memphis',
@@ -420,8 +420,8 @@ export const teams = [
     label: 'Nevada'
   },
   {
-    value: 'Nevada Las Vegas (UNLV)',
-    label: 'Nevada Las Vegas (UNLV)'
+    value: 'Nevada Las Vegas',
+    label: 'Nevada Las Vegas'
   },
   {
     value: 'New Mexico',
@@ -524,12 +524,12 @@ export const teams = [
     label: 'South Florida'
   },
   {
-    value: 'University of Southern California (USC)',
-    label: 'University of Southern California (USC)'
+    value: 'Southern California',
+    label: 'Southern California'
   },
   {
-    value: 'Southern Methodist (SMU)',
-    label: 'Southern Methodist (SMU)'
+    value: 'Southern Methodist',
+    label: 'Southern Methodist'
   },
   {
     value: 'Southern Miss',
@@ -544,8 +544,8 @@ export const teams = [
     label: 'Syracuse'
   },
   {
-    value: 'Texas Christian (TCU)',
-    label: 'Texas Christian (TCU)'
+    value: 'Texas Christian',
+    label: 'Texas Christian'
   },
   {
     value: 'Temple',
@@ -572,8 +572,8 @@ export const teams = [
     label: 'Texas Tech'
   },
   {
-    value: 'Texas El Paso (UTEP)',
-    label: 'Texas El Paso (UTEP)'
+    value: 'Texas El Paso',
+    label: 'Texas El Paso'
   },
   {
     value: 'Texas San Antonio',

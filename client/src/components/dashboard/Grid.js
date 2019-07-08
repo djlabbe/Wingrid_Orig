@@ -45,9 +45,8 @@ const Grid = ({ sheet, onCancel, getGrid, grid, loading }) => {
     });
   };
 
-  if (loading) {
-    return <Spinner />;
-  }
+  if (loading) return <Spinner />;
+
   return (
     <Fragment>
       <h1 className='large text-primary'>

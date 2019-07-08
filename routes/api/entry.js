@@ -18,7 +18,7 @@ router.post(
     check('sheet', 'Sheet is required')
       .not()
       .isEmpty(),
-    check('tiebreaker', 'Tiebreaker is required').isNumeric()
+    check('tiebreaker', 'An integer tiebreaker is required').isInt()
   ],
   async (req, res) => {
     const errors = validationResult(req);
