@@ -10,6 +10,7 @@ import EditProfile from '../profile/EditProfile';
 import SheetNew from '../sheet-forms/SheetNew';
 import NotFound from '../layout/NotFound';
 import PrivateRoute from '../routing/PrivateRoute';
+import AdminRoute from '../routing/AdminRoute';
 import Challenge from '../dashboard/Challenge';
 
 const Routes = () => {
@@ -23,7 +24,7 @@ const Routes = () => {
         <PrivateRoute exact path='/profile' component={Profile} />
         <PrivateRoute exact path='/create-profile' component={CreateProfile} />
         <PrivateRoute exact path='/edit-profile' component={EditProfile} />
-        <PrivateRoute exact path='/create-sheet' component={SheetNew} />
+        <AdminRoute exact path='/create-sheet' component={SheetNew} />
         <PrivateRoute exact path='/challenge' component={Challenge} />
         <Route component={NotFound} />
       </Switch>

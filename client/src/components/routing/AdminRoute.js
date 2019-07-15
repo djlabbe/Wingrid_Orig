@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 
-const PrivateRoute = ({
+const AdminRoute = ({
   component: Component,
-  auth: { isAuthenticated, loading },
+  auth: { isAdmin, loading },
   ...rest
 }) => (
   <Route
@@ -14,8 +14,8 @@ const PrivateRoute = ({
     render={props =>
       loading ? (
         <Spinner />
-      ) : !isAuthenticated ? (
-        <Redirect to='/login' />
+      ) : !isAdmin ? (
+        <Redirect to='/' />
       ) : (
         <Component {...props} />
       )
@@ -23,7 +23,7 @@ const PrivateRoute = ({
   />
 );
 
-PrivateRoute.propTypes = {
+AdminRoute.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
@@ -31,4 +31,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+export default connect(mapStateToProps)(AdminRoute);
