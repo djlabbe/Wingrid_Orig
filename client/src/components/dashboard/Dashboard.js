@@ -36,6 +36,14 @@ const Dashboard = ({ getAllSheets, sheetData: { sheets, loading } }) => {
     return (
       <Fragment>
         <h2 className='large text-primary'>Challenges</h2>
+        <p>
+          Select a challenge to submit your picks or view the grid.
+          <p>
+            <small>
+              Note: Each grid is only visible after you submit your picks.
+            </small>
+          </p>
+        </p>
         <h3 className='text-primary my-1'>Current</h3>
         <div className='my-1'>{renderChallenges(sheets.slice(0, 2))}</div>
         <h3 className='text-primary my-1'>Archived</h3>
