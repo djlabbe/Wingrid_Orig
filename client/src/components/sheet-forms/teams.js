@@ -88,8 +88,8 @@ export const teams = [
     label: "New York Jets"
   },
   {
-    value: "Oakland Raiders",
-    label: "Oakland Raiders"
+    value: "Las Vegas Raiders",
+    label: "Las Vegas Raiders"
   },
   {
     value: "Philadelphia Eagles",
@@ -124,8 +124,8 @@ export const teams = [
     label: "Tennessee Titans"
   },
   {
-    value: "Washington Redskins",
-    label: "Washington Redskins"
+    value: "Washington Football Team",
+    label: "Washington Football Team"
   },
   {
     value: "Air Force",
